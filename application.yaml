@@ -1,0 +1,19 @@
+
+server:
+#  address: 106.14.253.158
+  address: 127.0.0.1
+  port: 55555
+  subscribe: test.test1,test.test2
+sources:
+  address: 127.0.0.1
+  port: 3306
+  dataName: test
+  username: root
+  password: root
+
+product:
+  address: 127.0.0.1
+  port: 3306
+  dataName: test2
+  username: root
+  password: root

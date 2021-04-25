@@ -1,0 +1,9 @@
+mapping:
+  database: test
+  table: test2
+  targetTable: test2.name
+  targetPK:
+    id: id
+  targetColumns:
+    id: id
+    test: name
