@@ -1,4 +1,4 @@
-package dbParse
+package confParse
 
 import (
 	"fmt"

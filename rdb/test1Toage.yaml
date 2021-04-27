@@ -1,18 +1,17 @@
 mapping:
   database: test  #源数据库
   table: test1    #源数据表
-  targetTable: test2.name  #目标写入数据表
+  targetTable: test2.age  #目标写入数据表
   targetPK:
     src_id: idh   #目标表主键：源表主键
   targetColumns:
     src_id: idh  #目标字段： 源表字段
-    name: nameh
-  isQuery: true  #是否需要查询第三方表
+    age: ageh
+  isQuery: false  #是否需要查询第三方表
   queryTable: test2.age  #需要查询第三方表的表名
   queryColumns: #查询的字段关系 目标表字段: 查询表字段
     age_id: id  #目标写入字段： 第三方查询字段
   whereColumns:
     src_id: idh   #查询字段： 源表字段
     #组合得到 arg_id  select id from test2.age where src_id=id?
-
 

@@ -2,7 +2,7 @@
 server:
 #  address: 106.14.253.158
   address: 127.0.0.1
-  port: 55555
+  port: 11111
   subscribe: test.test1,test.test2
 sources:
   address: 127.0.0.1

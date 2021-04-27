@@ -37,16 +37,36 @@ func (d *Db) InitDB() {
 }
 
 // ProcessData 数据写入
-func (d *Db) ProcessData(sqlStr string, params []string) error {
-	fmt.Printf("sql:--%s  ;params:%s\n",sqlStr,params)
-	param:=make([]interface{},0)
-	for _, val := range params {
-		param=append(param,val)
-	}
-	_, err := d.DB.Exec(sqlStr, param...)
+func (d *Db) ProcessData(sqlStr string, params []interface{}) error {
+	//fmt.Printf("sql:--%s  ;params:%s\n",sqlStr,params)
+	//param:=make([]interface{},0)
+	//for _, val := range params {
+	//	param=append(param,val)
+	//}
+	_, err := d.DB.Exec(sqlStr, params...)
 	if err != nil {
-		fmt.Printf("sql exec is failed --%s\n",err)
+		fmt.Println(sqlStr,  params)
 		return err
 	}
 	return err
+}
+
+// QueryOtherTable 查询第三方表的字段值
+func (d *Db) QueryOtherTable(sqlStr string,params []interface{})(res []interface{},err error) {
+	rows, err := d.DB.Query(sqlStr, params...)
+	if err != nil{
+		fmt.Printf("sql exec is failed --%s\n",err)
+		return nil,err
+	}
+	columns,_:=rows.Columns()
+	length:=len(columns)
+	for rows.Next(){
+		res=make([]interface{},length)
+		columnPointers := make([]interface{}, length)
+		for i:=0;i<length;i++ {
+			columnPointers[i] = &res[i]
+		}
+		rows.Scan(columnPointers...)
+	}
+	return
 }

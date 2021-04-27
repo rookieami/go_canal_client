@@ -13,6 +13,7 @@ type Yaml struct {
 		Address   string `yaml:"address"`   //主机地址
 		Port      int    `yaml:"port"`      //端口
 		Subscribe string `yaml:"subscribe"` //监听正则关系
+
 	}
 	Sources struct { //源数据库配置
 		Address  string `yaml:"address"`  //源数据库地址
@@ -61,12 +62,16 @@ type RdbConfig struct {
 		Table         string            `yaml:"table"`         //源表
 		TargetTable   string            `yaml:"targetTable"`   //目标表
 		TargetPK      map[string]string `yaml:"targetPK"`      // 主键映射
-		MapAll        bool              `yaml:"mapAll"`        //是否全表字段映射
+		//MapAll        bool              `yaml:"mapAll"`        //是否全表字段映射
 		TargetColumns map[string]string `yaml:"targetColumns"` //字段映射
+		IsQuery bool `yaml:"isQuery"` //是否查询关联id
+		QueryTable string `yaml:"queryTable"`//需要查询的表
+		QueryColumns map[string]string `yaml:"queryColumns"`//关联关系
+		WhereColumns map[string]string `yaml:"whereColumns"` //查询映射关系
 	}
 }
 
-// InitConf 初始化解析配置
+// InitRDBConf 初始化解析配置
 func (r *RdbConfig) InitRDBConf() []*RdbConfig {
 	//获取指定目录下的所有文件
 	dir, err := ioutil.ReadDir("./rdb")
